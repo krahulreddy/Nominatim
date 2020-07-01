@@ -69,7 +69,7 @@ def pref(q):
     res = es.search(index="mydb", body={
         "query": {
             "match_phrase_prefix": {
-                "name": {
+                "address": {
                     "query": q,
                 }
             }
