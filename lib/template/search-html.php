@@ -166,7 +166,7 @@
                     //     res += " (" + hits[i]._source['osm_value'] + ")";
                     // if(res === '')
                     //     res = query;
-                    res = hits[i]._source.name;
+                    res = hits[i]._source.address;
                     res = res.replace(/\"/g, "'")
                     // console.log(res);
                     // Using photon API
