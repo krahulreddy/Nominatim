@@ -18,10 +18,10 @@ def CORS(request, response, resource):
     )
     if request.method == 'OPTIONS':
         response.set_header('Access-Control-Max-Age', 1728000)
-        response.set_header('Content-Type', 'text/plain charset=UTF-8')
+#        response.set_header('Content-Type', 'text/plain charset=UTF-8')
         response.set_header('Content-Length', 0)
         response.status_code = hug.HTTP_204
-
+"""
 @hug.get('/all')
 def all():
     es = Elasticsearch()
@@ -61,23 +61,25 @@ def sayt(q):
         }})
     # print(res)
     return res
+"""
 
 @hug.get('/pref')
 def pref(q):
+    if q == '':
+        return
     es = Elasticsearch()
-    # print(q)
-    res = es.search(index="mydb", body={
+    print(q)
+    res = es.search(index="nominatim_final", body={
         "query": {
-            "match_phrase_prefix": {
-                "address": {
-                    "query": q,
-                }
+            "multi_match": {
+            "type": "phrase_prefix",
+            "query": q
             }
         }})
-    # print(res)
+    print(res)
     return res
 
-
+"""
 @hug.get('/comp')
 def comp(q):
     es = Elasticsearch()
@@ -114,3 +116,4 @@ def comp(q):
     })
     # print(res)
     return res
+"""
